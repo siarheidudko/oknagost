@@ -79,7 +79,7 @@
 	}
 	if(have_comments()){
 		echo '<div id="comments" class="comments-area border rounded m-5 p-2" style="background-color:#ffffff;">';
-			wp_list_comments(array('style' => 'div', 'callback'=>theme_comment));
+			wp_list_comments(array('style' => 'div', 'callback'=>'theme_comment'));
 		echo '</div>';
 	} 
 ?>
