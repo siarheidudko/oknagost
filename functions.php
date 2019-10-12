@@ -77,7 +77,7 @@ add_filter( 'after_setup_theme', 'oknagost_theme_support' );
 
 //добавляю настройки кастомайзера темы
 function oknagost_customize_register($wp_customize) {
-	//имя секции настроек
+	//настройка темы
 	$wp_customize->add_section( 'oknagost_customizer' , array(
 		'title'      => __('Настройка темы','mytheme'),
 		'priority'   => 30,
@@ -114,7 +114,7 @@ function oknagost_customize_register($wp_customize) {
 			'label'      => __( 'Цвет шапки', 'oknagost' ),
 			'section'    => 'oknagost_customizer',
 			'settings'   => 'oknagost_header_background',
-				'priority'   => 1
+			'priority'   => 1,
 		)
 	));
 	//цвет текста на хидере
@@ -130,7 +130,7 @@ function oknagost_customize_register($wp_customize) {
 			'label'      => __( 'Цвет текста на шапке', 'oknagost' ),
 			'section'    => 'oknagost_customizer',
 			'settings'   => 'oknagost_header_textcolor',
-				'priority'   => 1
+			'priority'   => 1
 		)
 	));
 	//цвет кнопки меню
@@ -146,7 +146,7 @@ function oknagost_customize_register($wp_customize) {
 			'label'      => __( 'Цвет кнопки Меню', 'oknagost' ),
 			'section'    => 'oknagost_customizer',
 			'settings'   => 'oknagost_header_menubutton',
-				'priority'   => 1
+			'priority'   => 1
 		)
 	));
 	//цвет текста
@@ -162,7 +162,7 @@ function oknagost_customize_register($wp_customize) {
 			'label'      => __( 'Цвет текста (базовый)', 'oknagost' ),
 			'section'    => 'oknagost_customizer',
 			'settings'   => 'oknagost_body_textcolor',
-				'priority'   => 1
+			'priority'   => 1
 		)
 	));
 	//код внутри блока <HEAD></HEAD>
@@ -210,6 +210,27 @@ function oknagost_customize_register($wp_customize) {
 			'type'     => 'textarea',
 		)
 	));
+	//autoseo    
+    $wp_customize->add_setting(
+		'oknagost_autoseo', 
+		array(
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'transport'  => 'refresh',
+			'default'    => '',
+		)
+	);
+    $wp_customize->add_control(
+		'enable_oknagost_autoseo', 
+		array(
+			'label'      => esc_html__( 'Включить autoSEO (теги description и keywords)', 'oknagost' ),
+			'section'    => 'oknagost_customizer',
+			'settings'   => 'oknagost_autoseo',
+			'type'       => 'checkbox'
+		) 
+	);
+	
+	//настройка контактов
 	$wp_customize->add_section('oknagost_contacts_section', array(
 		'title'      => __('Настройка контактов', 'oknagost'),
 		'priority'   => 10,
@@ -217,10 +238,10 @@ function oknagost_customize_register($wp_customize) {
 	));
 	//наименование юр.лица
 	$wp_customize->add_setting('oknagost_top_jur', array(
-			'type'              => 'theme_mod',
-			'capability'        => 'edit_theme_options',
-			'transport'         => 'refresh',
-			'sanitize_callback' => 'sanitize_text_field',
+		'type'              => 'theme_mod',
+		'capability'        => 'edit_theme_options',
+		'transport'         => 'refresh',
+		'sanitize_callback' => 'sanitize_text_field',
 	));
 	$wp_customize->add_control('oknagost_top_jur', array(
 		'type'     => 'text',
@@ -230,10 +251,10 @@ function oknagost_customize_register($wp_customize) {
 	));
 	//унп
 	$wp_customize->add_setting('oknagost_top_unp', array(
-			'type'              => 'theme_mod',
-			'capability'        => 'edit_theme_options',
-			'transport'         => 'refresh',
-			'sanitize_callback' => 'sanitize_text_field',
+		'type'              => 'theme_mod',
+		'capability'        => 'edit_theme_options',
+		'transport'         => 'refresh',
+		'sanitize_callback' => 'sanitize_text_field',
 	));
 	$wp_customize->add_control('oknagost_top_unp', array(
 		'type'     => 'text',
@@ -243,10 +264,10 @@ function oknagost_customize_register($wp_customize) {
 	));
 	//телефон
 	$wp_customize->add_setting('oknagost_top_tel', array(
-			'type'              => 'theme_mod',
-			'capability'        => 'edit_theme_options',
-			'transport'         => 'refresh',
-			'sanitize_callback' => 'sanitize_text_field',
+		'type'              => 'theme_mod',
+		'capability'        => 'edit_theme_options',
+		'transport'         => 'refresh',
+		'sanitize_callback' => 'sanitize_text_field',
 	));
 	$wp_customize->add_control('oknagost_top_tel', array(
 		'type'     => 'text',
@@ -256,10 +277,10 @@ function oknagost_customize_register($wp_customize) {
 	));
 	//email
 	$wp_customize->add_setting('oknagost_top_email', array(
-			'type'              => 'theme_mod',
-			'capability'        => 'edit_theme_options',
-			'transport'         => 'refresh',
-			'sanitize_callback' => 'sanitize_text_field',
+		'type'              => 'theme_mod',
+		'capability'        => 'edit_theme_options',
+		'transport'         => 'refresh',
+		'sanitize_callback' => 'sanitize_text_field',
 	));
 	$wp_customize->add_control('oknagost_top_email', array(
 		'type'     => 'text',

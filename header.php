@@ -17,6 +17,28 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="<?php echo get_stylesheet_uri() ?>" />
+    <?php
+  		if(get_theme_mod('oknagost_autoseo')){
+			echo '<meta name="description" content="'.get_bloginfo("description").'">';
+			$keywords = array();
+			$searchkey = array("\"", "'", "~", "`", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "-", "+", "=", "№", ";", ":", "?", "<", ">", "{", "}", "[", "]", "\\", "|" , "/", ",", ".");
+			$arr = explode(" ", str_replace($searchkey, "", mb_strtolower(get_page_by_path(get_page_uri(), 'OBJECT', array('post', 'page'))->post_title)));
+			foreach ($arr as &$value) {
+				if(array_search($value,$keywords) === false){
+					$keywords[] = $value;
+				}
+			}
+			if(get_bloginfo("description")){
+				$arr2 = explode(" ", str_replace($searchkey, "", mb_strtolower(get_bloginfo("description"))));
+				foreach ($arr2 as &$value2) {
+					if(array_search($value2,$keywords) === false){
+						$keywords[] = $value2;
+					}
+				}
+			}
+			echo '<meta name="keywords" content="'.implode($keywords, ",").'">';
+        }
+    ?>
 	<title><?php echo get_bloginfo("description") . ' - ' . get_page_by_path(get_page_uri(), 'OBJECT', array('post', 'page'))->post_title; ?></title>
 	<?php wp_head() ?>
 	<?php
@@ -24,7 +46,7 @@
 		$headertextcolor = get_theme_mod('oknagost_header_textcolor');
 		$headermenubutton = get_theme_mod('oknagost_header_menubutton');
 	?>
-	<style type="text/css">
+	<style>
 		body{ <?php 
 			$backgroundimg = get_background_image();
 			$backgroundcolor = get_background_color();
@@ -61,7 +83,7 @@
 	?>
 </head>
 <body  <?php body_class() ?>>
-<?php 
+<?php
 	$headercode = get_theme_mod('oknagost_header_code');
 	if($headercode)
 		echo $headercode;
