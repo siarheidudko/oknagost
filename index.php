@@ -31,7 +31,13 @@
 	if($bodytextcolor){ echo ' style="color: '.$bodytextcolor.';"'; }
 ?>>
 	<?php
-		echo apply_filters('the_content', get_post()->post_content);
+		//echo apply_filters('the_content', get_post()->post_content);
+		if( have_posts() ){
+			while( have_posts() ):
+				the_post();
+				the_content();
+			endwhile;
+		}
 		if(get_post()->post_title == 'Отзывы'){
 			echo comments_template();
 		}
